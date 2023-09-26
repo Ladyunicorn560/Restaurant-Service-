@@ -1,0 +1,98 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+struct MenuItem {
+    int itemCode;
+    string description;
+    int size;
+    float price;
+};
+
+struct Order {
+    string name;
+    int itemCode;
+    int quantity;
+};
+
+vector<MenuItem> menu = {
+    {1, "Pizza", 1, 9.99},
+    {2, "Burger", 1, 4.99},
+    {3, "Salad", 1, 6.99},
+    {4, "Pasta", 1, 7.99},
+    {5, "Fries", 1, 2.99},
+    {6, "Sandwich", 1, 5.99},
+    {7, "Soup", 1, 3.99},
+    {8, "Steak", 1, 12.99},
+    {9, "Fish & Chips", 1, 8.99},
+    {10, "Sushi", 1, 10.99}
+};
+
+int main() {
+    vector<Order> orders;
+    int totalServed = 0;
+    
+    int choice;
+    Order newOrder;
+    
+    do {
+        cout << "\n===== Simple Food Ordering System =====\n";
+        cout << "1. Order\n";
+        cout << "2. Serve\n";
+        cout << "3. Display\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        
+        if (choice < 1 || choice > 4) {
+            cout << "\nInvalid choice! Please try again.\n";
+            continue; // Skip to the next iteration of the loop
+        }
+        
+        switch (choice) {
+            case 1:
+                cout << "\nMenu:\n";
+                cout << "=======\n";
+                cout << "Item Code\tDescription\t\tSize\tPrice\n";
+                cout << "------------------------------------------\n";
+                for (size_t i = 0; i < menu.size(); ++i) {
+                    cout << menu[i].itemCode << "\t\t" << menu[i].description << "\t\t" << menu[i].size << "\t$" << menu[i].price << "\n";
+                }
+                
+                cout << "\nEnter your name: ";
+                cin >> newOrder.name;
+                cout << "Enter the item code: ";
+                cin >> newOrder.itemCode;
+                cout << "Enter the quantity: ";
+                cin >> newOrder.quantity;
+                
+                orders.push_back(newOrder);
+                
+                cout << "\nOrder placed successfully!\n";
+                break;
+                
+            case 2:
+                if (totalServed < orders.size()) {
+                    cout << "\nOrder served for " << orders[totalServed].name << "!\n";
+                    totalServed++;
+                } else {
+                    cout << "\nNo orders to serve!\n";
+                }
+                break;
+                
+            case 3:
+                cout << "\nTotal Orders: " << orders.size() << "\n";
+                cout << "Total Served: " << totalServed << "\n";
+                break;
+                
+            case 4:
+                cout << "\nExiting the program...\n";
+                break;
+        }
+        
+    } while (choice != 4);
+    
+    return 0;
+}
+
